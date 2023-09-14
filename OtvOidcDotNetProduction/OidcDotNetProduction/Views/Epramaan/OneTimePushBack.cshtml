@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "OneTimePushBack";
+}
+
+<h2>OneTimePushBack</h2>
+@if (@ViewBag.responseString == "success")
+{
+    <div class="alert alert-success">
+        <strong>@ViewBag.responseString!</strong> Successfully mapped with e-Pramaan User.
+    </div>
+}
+
+else if (@ViewBag.responseString == "SYS001")
+{
+    <div class="alert alert-danger">
+        <strong>@ViewBag.responseString!</strong> Failed to mapped with e-Pramaan User.
+    </div>
+}
+
+else
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> Failed to map with e-Pramaan User.
+    </div>
+}
+
+
+
+

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32602.291
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OIDC_DOT_NET_INTEGRATION_PRODUCTION", "OIDC_DOT_NET_INTEGRATION_PRODUCTION.csproj", "{3729D779-8F4D-44D0-AA6B-82F1CF609CD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SH256_Hmac_Create", "..\..\SH256_Hmac_Create\SH256_Hmac_Create.csproj", "{7E6344EE-103B-49C2-9506-E02F54F56D39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3729D779-8F4D-44D0-AA6B-82F1CF609CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3729D779-8F4D-44D0-AA6B-82F1CF609CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3729D779-8F4D-44D0-AA6B-82F1CF609CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3729D779-8F4D-44D0-AA6B-82F1CF609CD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E6344EE-103B-49C2-9506-E02F54F56D39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E6344EE-103B-49C2-9506-E02F54F56D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E6344EE-103B-49C2-9506-E02F54F56D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E6344EE-103B-49C2-9506-E02F54F56D39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF27248B-736A-41F4-BA9D-C6C300CF5BE1}
+	EndGlobalSection
+EndGlobal
