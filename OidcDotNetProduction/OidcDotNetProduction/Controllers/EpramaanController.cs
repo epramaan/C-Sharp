@@ -6,9 +6,6 @@ using IdentityModel;
 using RestSharp;
 using System.Text.Json;
 using System.Security.Cryptography.X509Certificates;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION.Controllers
 {
@@ -18,21 +15,38 @@ namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION.Controllers
         public static readonly string response_type = "code";
         public static readonly string code_challenge_method = "S256";
         public static readonly string grant_type = "authorization_code";
+        public static readonly string iss = "ePramaan";
 
         public static readonly string auth_grant_request_uri = "https://epramaan.meripehchaan.gov.in/openid/jwt/processJwtAuthGrantRequest.do";
         public static readonly string token_request_uri = "https://epramaan.meripehchaan.gov.in/openid/jwt/processJwtTokenRequest.do";
+        public static readonly string logout_uri = "https://epramaan.meripehchaan.gov.in/openid/jwt/processOIDCSLORequest.do";
 
-        public static readonly string client_id = "1****1288";
-        public static readonly string salt = "1****1";
-        public static readonly string aeskey = "********************************";
+        //production
+        //aadhaar otp
+        public static readonly string client_id = "100001297";
+        public static readonly string salt = "100001";
+        public static readonly string aeskey = "cb3a59f6-0617-4898-b859-8bb02fee91b3";
         public static readonly string redirect_uri = "http://localhost:44355/Epramaan/ProcessAuthCodeAndGetToken";
         public static readonly string Certificate = "D:/Integration/aspDotNet/OidcDotNetProduction/OidcDotNetProduction/epramaanprod2016.cer";
+        public static readonly string service_logout_uri = "http://localhost:44355/Epramaan/LogoutOnEpramaan";
+        public static readonly string customParameter = "WhateverServiceWants";
+
+
+       /* //Staging     
+        //epramaan base mapping
+        public static readonly string client_id = "100001071";
+        public static readonly string salt = "100716";
+        public static readonly string aeskey = "a0ad6b94-c5fb-4eaa-9669-af4646f2acb6";
+        public static readonly string redirect_uri = "http://localhost:44355/Epramaan/ProcessAuthCodeAndGetToken";
+        public static readonly string Certificate = "D:/App/Cert/epramaan.crt";
+        public static readonly string service_logout_uri = "http://localhost:44355/Epramaan/LogoutOnEpramaan";
+        public static readonly string customParameter = "WhateverServiceWants";*/
 
         public static string codeVerifier;
         public static string stateID;
         public static string nonce;
 
-        public ActionResult LoginUsingEpramaan()
+        public ActionResult LoginUsingEpramaan(string decodedString)
         {
             stateID = Guid.NewGuid().ToString();                //Must be unique and create new for each request
             nonce = CryptoRandom.CreateUniqueId(16);            //Create new randomly generated 16 characters string for every request
@@ -50,7 +64,10 @@ namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION.Controllers
 
             //HMAC SHA256 of queryString 
             string apiHmac = hashHMACHex(inputvalue, aeskey);
-            ViewBag.finalUrl = auth_grant_request_uri + "?&scope=" + scope + "&response_type=" + response_type + "&redirect_uri=" + redirect_uri + "&state=" + stateID + "&code_challenge_method=" + code_challenge_method + "&nonce=" + nonce + "&client_id=" + client_id + "&code_challenge=" + code_challenge + "&request_uri=" + auth_grant_request_uri + "&apiHmac=" + apiHmac;
+            ViewBag.finalUrl = auth_grant_request_uri + "?&scope=" + scope + "&response_type=" + response_type +"&state=" + stateID + "&code_challenge_method=" + code_challenge_method + "&nonce=" + nonce + "&client_id=" + client_id + "&code_challenge=" + code_challenge + "&request_uri=" + auth_grant_request_uri + "&apiHmac=" + apiHmac + "&redirect_uri=" + redirect_uri;
+            ViewBag.decodedString = decodedString;
+
+
             return View();
         }
 
@@ -61,8 +78,8 @@ namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION.Controllers
             var client = new RestClient(token_request_uri);         //install NuGet package "RestSharp", version must be <=106.0.0
             var request = new RestSharp.RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/json");
-            var body = "{\"code\":[\"" + authCode + "\"],\"grant_type\":[\"" + grant_type + "\"],\"scope\":[\"" + scope + "\"],\"redirect_uri\":[\"" + auth_grant_request_uri + "\"],\"request_uri\":[\"" + redirect_uri + "\"],\"code_verifier\":[\"" + codeVerifier + "\"],\"client_id\":[\"" + client_id + "\"]}";
-            request.AddParameter("application/json", body, ParameterType.RequestBody);
+            var data = "{\"code\":[\"" + authCode + "\"],\"grant_type\":[\"" + grant_type + "\"],\"scope\":[\"" + scope + "\"],\"redirect_uri\":[\"" + auth_grant_request_uri + "\"],\"request_uri\":[\"" + redirect_uri + "\"],\"code_verifier\":[\"" + codeVerifier + "\"],\"client_id\":[\"" + client_id + "\"]}";
+            request.AddParameter("application/json", data, ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
             string jwtToken = response.Content;
 
@@ -79,6 +96,8 @@ namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION.Controllers
             ViewBag.name = root.GetProperty("name");
             ViewBag.username = root.GetProperty("username");
             ViewBag.mobile_number = root.GetProperty("mobile_number");
+            ViewBag.session_id = root.GetProperty("session_id");    //required for logout api only
+            ViewBag.sub = root.GetProperty("sub");                  //required for logout api only
 
             try
             {

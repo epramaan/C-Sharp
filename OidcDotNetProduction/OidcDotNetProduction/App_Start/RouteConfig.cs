@@ -18,6 +18,12 @@ namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Epramaan", action = "LoginUsingEpramaan", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "CatchAll",
+                url: "{*url}",
+                defaults: new { controller = "Epramaan", action = "LoginUsingEpramaan" }
+            );
         }
     }
 }
