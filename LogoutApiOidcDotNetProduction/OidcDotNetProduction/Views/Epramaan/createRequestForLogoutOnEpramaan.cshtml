@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "createRequestForLogoutOnEpramaan";
+}
+
+<h2>createRequestForLogoutOnEpramaan</h2>
+
+<form id="context" action="@ViewBag.logout_uri" method="post">
+    @Html.AntiForgeryToken()
+
+    <input name="data" value="@ViewBag.data" type="hidden" />
+</form>
+
+<script>
+    document.getElementById('context').submit();
+</script>
+
+

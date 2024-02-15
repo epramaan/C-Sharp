@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "ProcessAuthCodeAndGetToken";
+}
+
+<h2> Welcome @ViewBag.name</h2>
+<hr />
+@*<h3>username        : @ViewBag.username</h3>
+<h3>mobile no.      : @ViewBag.mobile_number</h3>
+<h3>aadhar ref. no. : @ViewBag.aadhaar_ref_no</h3>
+<hr />*@
+<form method="post" action="createRequestForLogoutOnEpramaan">
+        <input type="hidden" name="sub" value="@ViewBag.sub">
+        <input type="hidden" name="sessionId" value="@ViewBag.session_id">
+        <button type="submit">Logout on e-Pramaan</button>
+</form>
