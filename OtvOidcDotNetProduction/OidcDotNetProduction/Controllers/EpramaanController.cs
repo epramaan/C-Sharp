@@ -19,15 +19,15 @@ namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION.Controllers
         public static readonly string code_challenge_method = "S256";
         public static readonly string grant_type = "authorization_code";
 
-        public static readonly string auth_grant_request_uri = "https://epramaan.meripehchaan.gov.in/openid/jwt/processJwtAuthGrantRequest.do";
-        public static readonly string token_request_uri = "https://epramaan.meripehchaan.gov.in/openid/jwt/processJwtTokenRequest.do";
-        public static readonly string push_back_uri = "https://epramaan.meripehchaan.gov.in/rest/epramaan/enrol/response";
+        public static readonly string auth_grant_request_uri = "https://epstg.meripehchaan.gov.in/openid/jwt/processJwtAuthGrantRequest.do";
+        public static readonly string token_request_uri = "https://epstg.meripehchaan.gov.in/openid/jwt/processJwtTokenRequest.do";
+        public static readonly string push_back_uri = "https://epstg.meripehchaan.gov.in/rest/epramaan/enrol/response";
 
-        public static readonly string client_id = "100001231";
-        public static readonly string salt = "100001";
+        public static readonly string client_id = "1********";
+        public static readonly string salt = "1****1";
         public static readonly string aeskey = "cb3a59f6-0617-4898-b859-8bb02fee91b3";
         public static readonly string redirect_uri = "http://localhost:44355/Epramaan/ProcessAuthCodeAndGetToken";
-        public static readonly string Certificate = "D:/Integration/aspDotNet/OidcDotNetProduction/OidcDotNetProduction/epramaanprod2016.cer";
+        public static readonly string Certificate = "D:/App/Cert/epramaan_stg.crt";
 
         public static string codeVerifier;
         public static string stateID;
