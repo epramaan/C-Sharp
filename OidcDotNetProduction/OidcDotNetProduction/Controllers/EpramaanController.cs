@@ -21,15 +21,26 @@ namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION.Controllers
         public static readonly string token_request_uri = "https://epramaan.meripehchaan.gov.in/openid/jwt/processJwtTokenRequest.do";
         public static readonly string logout_uri = "https://epramaan.meripehchaan.gov.in/openid/jwt/processOIDCSLORequest.do";
 
-        //Staging     
-        //epramaan base mapping
-        public static readonly string client_id = "1******1";
-        public static readonly string salt = "1***6";
-        public static readonly string aeskey = "a0ad6b94-c5fb-4eaa-9669-af4646f2acb6";
+        //production
+        //aadhaar otp
+        public static readonly string client_id = "1*******7";
+        public static readonly string salt = "1****1";
+        public static readonly string aeskey = "cb********************************b3";
         public static readonly string redirect_uri = "http://localhost:44355/Epramaan/ProcessAuthCodeAndGetToken";
-        public static readonly string Certificate = "D:/App/Cert/epramaan_stg.crt";
+        public static readonly string Certificate = "D:/Integration/aspDotNet/OidcDotNetProduction/OidcDotNetProduction/epramaanprod2016.cer";
         public static readonly string service_logout_uri = "http://localhost:44355/Epramaan/LogoutOnEpramaan";
         public static readonly string customParameter = "WhateverServiceWants";
+
+
+       /* //Staging     
+        //epramaan base mapping
+        public static readonly string client_id = "100001071";
+        public static readonly string salt = "100716";
+        public static readonly string aeskey = "a0ad6b94-c5fb-4eaa-9669-af4646f2acb6";
+        public static readonly string redirect_uri = "http://localhost:44355/Epramaan/ProcessAuthCodeAndGetToken";
+        public static readonly string Certificate = "D:/App/Cert/epramaan.crt";
+        public static readonly string service_logout_uri = "http://localhost:44355/Epramaan/LogoutOnEpramaan";
+        public static readonly string customParameter = "WhateverServiceWants";*/
 
         public static string codeVerifier;
         public static string stateID;
