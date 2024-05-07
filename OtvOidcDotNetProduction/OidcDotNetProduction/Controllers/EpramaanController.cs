@@ -134,7 +134,7 @@ namespace OIDC_DOT_NET_INTEGRATION_PRODUCTION.Controllers
             byte[] secretKey_byte = generateAES256Key(nonce);
             var decryptedToken = Jose.JWT.Decode(jwtToken, secretKey_byte);         //install Nuget Package "jose-jwt"
             X509Certificate2 cert = new X509Certificate2(Certificate);
-            RSACryptoServiceProvider csp = (RSACryptoServiceProvider)cert.PublicKey.Key;
+            RSA csp= cert.GetRSAPublicKey();
             string json = Jose.JWT.Decode(decryptedToken, csp);
             ViewBag.json = json;
 
